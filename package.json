@@ -1,0 +1,22 @@
+{
+  "name": "nde",
+  "version": "1.0.0",
+  "description": "scratch testing node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "testing"
+  ],
+  "author": "Mark Callahan",
+  "license": "MIT",
+  "dependencies": {
+    "chart.js": "^3.9.1",
+    "express": "^4.18.1",
+    "install": "^0.13.0",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.20",
+    "npm": "^8.19.2"
+  }
+}
