@@ -14,18 +14,22 @@ async function api_call() {
         const api_url = `/api/${lat},${lon}`;
         const response = await fetch(api_url);
         const json = await response.json();
-        console.log(json);
 
         // weather information 
-        shortForecast = json.forecast.properties.periods[0].shortForecast;
-        document.getElementById('weatherDesc').textContent = shortForecast;
+        today = json.forecast.properties.periods[0].name;
+        today_date = json.forecast.properties.periods[0].startTime;
+        today_detail_forecast = json.forecast.properties.periods[0].detailedForecast;
+
+        document.getElementById('today').textContent = today;
+        document.getElementById('todayDate').textContent = today_date;
+        document.getElementById('todayDetailForecast').textContent = today_detail_forecast;
+
 
         // tide information
         currTide = json.tide.predictions[0].v;
         xs = json.xs;
         ys = json.ys;
         document.getElementById('currTide').textContent = currTide;
-        console.log(xs);
 
         const ctx = document.getElementById("chart").getContext("2d");
         const myChart = new Chart(ctx, {
