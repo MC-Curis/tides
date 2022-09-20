@@ -75,7 +75,7 @@ app.get('/api/:latlon', async (request, response) => {
         xs: xs,
         ys: ys
     };
-    console.log(data);
+    // console.log(data);
     response.json(data)
 });
 
