@@ -1,20 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>NODE TESTING</title>
   </head>
   <body>
     <h1>Current Weather</h1>
     <p>Today's Forecast: <span id="weatherDesc"></span></p>
     <p>Current Tide Level: <span id="currTide"></span> ft.</p>
+    <p>Current Time: <span id="currTime"></span> </p>
     <div id="chart-wrapper">
       <canvas id="chart"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
     <script src="sketch.js"></script>
   </body>
 </html>

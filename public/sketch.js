@@ -20,12 +20,15 @@ async function api_call() {
         shortForecast = json.forecast.properties.periods[0].shortForecast;
         document.getElementById('weatherDesc').textContent = shortForecast;
 
+        //current time 
+        time = json.timestamp;
+        document.getElementById('currTime').textContent = time;
+
         // tide information
         currTide = json.tide.predictions[0].v;
         xs = json.xs;
         ys = json.ys;
         document.getElementById('currTide').textContent = currTide;
-        console.log(xs);
 
         const ctx = document.getElementById("chart").getContext("2d");
         const myChart = new Chart(ctx, {
@@ -43,8 +46,30 @@ async function api_call() {
                 stepped: false,
                 tension: 0,
               },
+              // {
+              //   label: 'current time',
+              //   data: [6.449],
+              //   pointRadius: 5,
+              //   borderWidth: 5,
+              //   fillColor: 'red',
+              //   pointHighlightFill: 'red',
+              //   borderColor: 'red',
+
+              // }
             ],
-          }
+            options: {
+              scales: {
+                x: {
+                  type: 'time',
+                  time: {
+                    unit: 'day'
+                  }
+
+                }
+              }
+            }
+          },
+          plugins: []
         })
 
     });
