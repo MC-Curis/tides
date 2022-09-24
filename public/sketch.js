@@ -16,19 +16,28 @@ async function api_call() {
         const json = await response.json();
         console.log(json);
 
+
         // weather information 
         shortForecast = json.forecast.properties.periods[0].shortForecast;
         document.getElementById('weatherDesc').textContent = shortForecast;
 
         //current time 
         time = json.timestamp;
-        document.getElementById('currTime').textContent = time;
+ 
 
         // tide information
-        currTide = json.tide.predictions[0].v;
+        currentTime = json.now_xs;
+        currTideLevel = json.now_ys;
+        console.log(currentTime);
+        console.log(currTideLevel[0]);
+     
+      
+        document.getElementById('currentTime').textContent = currentTime;
+        document.getElementById('currTideLevel').textContent = currTideLevel;
+
         xs = json.xs;
         ys = json.ys;
-        document.getElementById('currTide').textContent = currTide;
+        scatter = [{x: currentTime[0], y : currTideLevel}];
 
         const ctx = document.getElementById("chart").getContext("2d");
         const myChart = new Chart(ctx, {
@@ -46,30 +55,15 @@ async function api_call() {
                 stepped: false,
                 tension: 0,
               },
-              // {
-              //   label: 'current time',
-              //   data: [6.449],
-              //   pointRadius: 5,
-              //   borderWidth: 5,
-              //   fillColor: 'red',
-              //   pointHighlightFill: 'red',
-              //   borderColor: 'red',
-
-              // }
-            ],
-            options: {
-              scales: {
-                x: {
-                  type: 'time',
-                  time: {
-                    unit: 'day'
-                  }
-
-                }
+              {
+                type: 'scatter',
+                label: 'current time',
+                data: scatter,
+                pointRadius: 9,
+                pointBackgroundColor: '#5287E8',
               }
-            }
+            ],
           },
-          plugins: []
         })
 
     });
