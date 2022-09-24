@@ -1,11 +1,21 @@
-p {
-    font-family: "Myriad Pro", "sans-serif";
-    font-size: 10pt;
-    color: #000000;
+h2 {
+    font-family: 'Courier New', monospace;
+    font-size: 16pt;
+    color: #2c2a3b;
+    padding-left: 1rem;
+}
+
+h1 {
+    font-family: 'Courier New', monospace;
+    font-size: 20pt;
+    color: #2c2a3b;
+    padding-left: 1rem;
 }
 
 
-/* #map {
-    height: 300px;
-    width: 500px;
-  } */
+#chart {
+    max-width: 1000px;
+    max-height: 600px;
+    padding-top: 3rem;
+    padding-left: 1rem;
+  }

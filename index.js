@@ -32,18 +32,6 @@ app.get('/api/:latlon', async (request, response) => {
 
     // date variable 
     var date = new Date(); 
-   
-    // current Time
-    // var time = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    // todays date formatted
-    // const today_year = date.getFullYear().toString();
-    // var today_month = (date.getMonth() + 1).toString();
-    // var today_day = date.getDate().toString();
-    // (today_day.length == 1) && (today_day = '0' + today_day);
-    // (today_month.length == 1) && (today_month = '0' + today_month);
-    // var today = today_year + today_month + today_day;
-    // // console.log(`Today's Date: ${today}`)
-
 
     const today_year = date.getFullYear().toString();
     var today_month = (date.getMonth() + 1).toString();
@@ -82,8 +70,8 @@ app.get('/api/:latlon', async (request, response) => {
 
 
     // current tide level 
-    const now_xs = [];
-    const now_ys = [];
+    const current_tide_time = [];
+    const current_tide_level = [];
     const now_tide_url =`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?date=latest&station=8665530&product=predictions&datum=STND&time_zone=lst_ldt&units=english&format=json`;    
     const now_tide_response = await fetch(now_tide_url);
     const now_tide_json = await now_tide_response.json();
@@ -91,47 +79,17 @@ app.get('/api/:latlon', async (request, response) => {
     const max_tide_arr = now_tide_json.predictions[max_tide_entry]; 
     const max_date = now_tide_json.predictions[max_tide_entry].t;
     const max_level = now_tide_json.predictions[max_tide_entry].v;
-    now_xs.push(max_date);
-    now_ys.push(max_level);
-    // xs.push(max_date);
-    // ys.push(max_level)
-
-    const p_all = tide_json.predictions;
-    p_all.push(max_tide_arr); 
-    
-    const xs2 = [];
-    const ys2 = [];
-
-    const var_arr = p_all.map(p_all => {
-        return {...p_all, date: new Date(p_all.t)};
-      });
-
-    const sortedAsc = var_arr.sort(
-        (objA, objB) => Number(objA.date) - Number(objB.date),
-        );
-
-    for (let i = 0; i < sortedAsc.length; i++) {
-        const date = sortedAsc[i].t;
-        const level = sortedAsc[i].v;
-        xs2.push(date);
-        ys2.push(level);
-    };
-    obj = tide_json.predictions;
-
+    current_tide_time.push(max_date);
+    current_tide_level.push(max_level);
 
     const data = {
         timestamp: today_wTime,
         forecast: fore_json,
-        // tide: tide_json,
-        // t_predict: tide_json.predictions,
         xs: xs,
         ys: ys,
-        now_xs: now_xs,
-        now_ys: now_ys,
-        xs2: xs2,
-        ys2: ys2
+        current_tide_time: current_tide_time,
+        current_tide_level: current_tide_level,
     };
-    // console.log(t_predict)
     response.json(data)
 });
 

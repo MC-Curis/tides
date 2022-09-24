@@ -18,26 +18,21 @@ async function api_call() {
 
 
         // weather information 
-        shortForecast = json.forecast.properties.periods[0].shortForecast;
-        document.getElementById('weatherDesc').textContent = shortForecast;
+        detailedForecast = json.forecast.properties.periods[0].detailedForecast;
+        document.getElementById('detailedForecast').textContent = detailedForecast;
 
         //current time 
         time = json.timestamp;
  
-
-        // tide information
-        currentTime = json.now_xs;
-        currTideLevel = json.now_ys;
-        console.log(currentTime);
-        console.log(currTideLevel[0]);
-     
-      
+        // current tide information
+        currentTime = json.current_tide_time;
+        currTideLevel = json.current_tide_level;     
         document.getElementById('currentTime').textContent = currentTime;
         document.getElementById('currTideLevel').textContent = currTideLevel;
 
         xs = json.xs;
         ys = json.ys;
-        scatter = [{x: currentTime[0], y : currTideLevel}];
+        scatter_data = [{x: currentTime[0], y : currTideLevel}];
 
         const ctx = document.getElementById("chart").getContext("2d");
         const myChart = new Chart(ctx, {
@@ -46,7 +41,6 @@ async function api_call() {
             labels: xs,
             datasets: [
               {
-                label: "Tide Levels",
                 data: ys,
                 borderColor: "#5287E8",
                 borderWidth: 3,
@@ -57,13 +51,40 @@ async function api_call() {
               },
               {
                 type: 'scatter',
-                label: 'current time',
-                data: scatter,
+                data: scatter_data,
                 pointRadius: 9,
                 pointBackgroundColor: '#5287E8',
               }
             ],
           },
+          options: {
+            tooltips: {
+              callbacks: {
+                  label: function(tooltipItem, data) {
+                      var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || 'Other';
+                      var label = data.labels[tooltipItem.index];
+                      return datasetLabel + ': ' + label;
+                  }
+              }
+          },
+            plugins: {
+                legend: {
+                    display: false
+                },
+            },
+            scales: {
+              x: {
+                grid: {
+                  display: false,
+                },
+              },
+              y: {
+                grid: {
+                  display: false,
+                },
+              },
+            }
+          }
         })
 
     });
