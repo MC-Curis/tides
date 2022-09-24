@@ -16,7 +16,6 @@ async function api_call() {
         const json = await response.json();
         console.log(json);
 
-
         // weather information 
         detailedForecast = json.forecast.properties.periods[0].detailedForecast;
         document.getElementById('detailedForecast').textContent = detailedForecast;

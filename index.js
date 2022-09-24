@@ -2,6 +2,9 @@
 // index.js is what is used to make API Calls using from the server using node.js
 // the app.get('/api') creates an API that the sketch.js pulls directly into the client 
 
+// for FUTURE USE this pulls ALL Stations
+// https://api.tidesandcurrents.noaa.gov/mdapi/prod/webapi/stations.json
+
 const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
@@ -58,7 +61,7 @@ app.get('/api/:latlon', async (request, response) => {
     // tide predictions multiple days
     const xs = [];
     const ys = [];
-    const tide_url =`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${today}&end_date=${future}&station=8665530&product=predictions&datum=STND&time_zone=lst_ldt&units=english&format=json`;
+    const tide_url =`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${today}&end_date=${future}&station=8665530&product=predictions&datum=MLW&time_zone=lst_ldt&units=english&format=json`;
     const tide_response = await fetch(tide_url);
     const tide_json = await tide_response.json();
     for (let i = 0; i < tide_json.predictions.length; i++) {
@@ -68,15 +71,13 @@ app.get('/api/:latlon', async (request, response) => {
         ys.push(level);
     };
 
-
     // current tide level 
     const current_tide_time = [];
     const current_tide_level = [];
-    const now_tide_url =`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?date=latest&station=8665530&product=predictions&datum=STND&time_zone=lst_ldt&units=english&format=json`;    
+    const now_tide_url =`https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?date=latest&station=8665530&product=predictions&datum=MLW&time_zone=lst_ldt&units=english&format=json`;    
     const now_tide_response = await fetch(now_tide_url);
     const now_tide_json = await now_tide_response.json();
     const max_tide_entry = Object.keys(now_tide_json.predictions).pop();
-    const max_tide_arr = now_tide_json.predictions[max_tide_entry]; 
     const max_date = now_tide_json.predictions[max_tide_entry].t;
     const max_level = now_tide_json.predictions[max_tide_entry].v;
     current_tide_time.push(max_date);
@@ -84,6 +85,7 @@ app.get('/api/:latlon', async (request, response) => {
 
     const data = {
         timestamp: today_wTime,
+        location: gridId,
         forecast: fore_json,
         xs: xs,
         ys: ys,
