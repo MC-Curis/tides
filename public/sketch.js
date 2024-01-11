@@ -75,22 +75,37 @@ async function api_call() {
             },
           },
           scales: {
-            x: {
-              grid: {
-                display: false,
-              },
-            },
-            y: {
-              grid: {
-                display: false,
-              },
-              // ticks: { color: 'white', beginAtZero: true }
-              ticks: {
-                callback: function (value, index, ticks) {
-                  return value + " ft";
+            xAxes: [
+              {
+                type: "time",
+                time: {
+                  unit: "minute",
+                  unitStepSize: 120,
+                  displayFormats: {
+                    minute: "h:mm A",
+                  },
+                },
+                gridLines: {
+                  display: false,
+                },
+                ticks: {
+                  fontColor: "white", // Change this line
                 },
               },
-            },
+            ],
+            yAxes: [
+              {
+                gridLines: {
+                  display: false,
+                },
+                ticks: {
+                  fontColor: "white", // Change this line
+                  callback: function (value, index, ticks) {
+                    return value + " ft";
+                  },
+                },
+              },
+            ],
           },
         },
       });
