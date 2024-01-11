@@ -1,7 +1,7 @@
 body {
     /* display: flex; */
     justify-content: center;
-    align-items: left;
+    align-items: center;
     height: 100vh;
     margin: 0;
     background: #222;
@@ -13,14 +13,10 @@ body {
     /* background-image: url(./assets/background.jpg); */
 }
 
-/* div {
-    display: block;
-} */
-
 .card {
     background: #474c63a6;
     color: white;
-    padding: 2em;
+    padding: 1em;
     border-radius: 30px;
     width: 100%;
     max-width: 1000px;
@@ -39,7 +35,7 @@ span {
     padding: 1em;
     border-radius: 30px;
     width: 100%;
-    max-width: 1000px;
+    /* max-width: 1000px; */
     max-height: 600px;
     margin: 1em;
   }
@@ -54,4 +50,4 @@ span {
     max-width: 1000px;
     max-height: 600px;
     margin: 1em;
-  }
+  } 

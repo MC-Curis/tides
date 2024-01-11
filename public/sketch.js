@@ -44,7 +44,7 @@ async function api_call() {
             {
               type: "scatter",
               data: scatter_data,
-              pointRadius: 9,
+              pointRadius: 10,
               pointBackgroundColor: "rgb(77, 163, 110)",
             },
             {
@@ -70,9 +70,16 @@ async function api_call() {
             },
           },
           plugins: {
-            legend: {
-              display: false,
-            },
+            datalabels: {
+              display: true,
+              color: 'black',
+              formatter: function(value, context) {
+                return context.dataset.data[context.dataIndex].y;
+              }
+            }
+          },
+          legend: {
+            display: false,
           },
           scales: {
             xAxes: [
