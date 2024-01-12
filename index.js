@@ -14,7 +14,7 @@ app.use(express.static('public'));
 
 app.get('/api/:latlon', async (request, response) => {
     //  getting lat and lon from client page
-    console.log(request.params)
+    // console.log(request.params)
     const latlon = request.params.latlon.split(',');
     const lat = latlon[0];
     const lon = latlon[1];
@@ -32,7 +32,7 @@ app.get('/api/:latlon', async (request, response) => {
     const forecast_url =`https://api.weather.gov/gridpoints/CHS/${gridX},${gridY}/forecast`;
     const fore_response = await fetch(forecast_url);
     const fore_json = await fore_response.json(); 
-    console.log(fore_json.properties.periods)
+    // console.log(fore_json.properties.periods)
 
     // date variable 
     var date = new Date(); 
