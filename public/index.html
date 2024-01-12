@@ -4,21 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NODE TESTING 1
-    </title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Tide & Weather Tracker</title>
   </head>
   <body>
-    <h1>Current Weather</h1>
-    <p>Date: <span id="todayDate"></span></p>
-    <p>
-      <span id="today"></span>'s Forecast:
-      <span id="todayDetailForecast"></span>
-    </p>
-    <p>Current Tide Level: <span id="currTide"></span> ft.</p>
-    <div id="chart-wrapper">
-      <canvas id="chart"></canvas>
+    <div class="wrapper">
+      <div class="card">
+        <h1>Current Weather & Tide Information</h1>
+        <h2>Current Time: <span id="currentTime"></span> </h2>
+        <h2>Today's Forecast: <span id="detailedForecast"></span></h2>
+        <h2>Current Tide Level: <span id="currTideLevel_text"></span></h2>
+      </div>
+      <div id="chart-wrapper">
+        <canvas id="chart"></canvas>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+      integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+      crossorigin=""
+    ></script>
     <script src="sketch.js"></script>
   </body>
 </html>
